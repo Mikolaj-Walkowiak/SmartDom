@@ -8,7 +8,7 @@
 
 static const struct device *sensor;
 
-int sensor_start()
+int sensor_init()
 {
 	sensor = device_get_binding("I2C_1");
 	if (!sensor) {

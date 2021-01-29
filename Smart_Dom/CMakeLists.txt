@@ -5,4 +5,4 @@ find_package(Zephyr)
 project(Smart_Dom)
 
 # source files
-target_sources(app PRIVATE code/main.c code/light_sensor.c)
+target_sources(app PRIVATE code/main.c code/light_sensor.c code/blinds.c)
