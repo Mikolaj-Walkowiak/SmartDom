@@ -19,9 +19,13 @@ macro reset
 """
     env Humidity 100
 """
-macro blinds_pos
+macro read_blinds
 """
     sysbus.gpioPortA ReadDoubleWord 0xc
+"""
+macro read_lights
+"""
+    sysbus.gpioPortB ReadDoubleWord 0xc
 """
 
 

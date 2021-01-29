@@ -16,7 +16,7 @@ int blinds_init(){
         //int gpio_pin_configure(const struct device *port, gpio_pin_t pin, gpio_flags_t flags)
 		result = gpio_pin_configure(blinds,i,GPIO_OUTPUT_ACTIVE);
 		if (result) {
-			printf("ERROR: Couldn't configure GPIOC pin %d", i);
+			printf("ERROR: Couldn't configure GPIOA pin %d", i);
 			return 1;
 		}
     }
