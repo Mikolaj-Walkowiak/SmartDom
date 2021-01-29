@@ -1,0 +1,3 @@
+sensor: Sensors.SI70xx @ i2c1 0x40{
+	model: Model.SI7021
+	}

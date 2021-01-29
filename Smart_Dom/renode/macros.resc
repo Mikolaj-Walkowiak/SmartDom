@@ -2,7 +2,7 @@ using sysbus
 
 mach create
 machine LoadPlatformDescription @platforms/cpus/stm32f103.repl
-
+machine LoadPlatformDescription @renode/connections.repl
 $bin?=@build/zephyr/zephyr.elf
 
 showAnalyzer uart2
@@ -12,13 +12,25 @@ macro start
 """
     sysbus LoadELF $bin
     emulation CreateEnvironment "env"
+    machine SetEnvironment env
     runMacro $reset
 """
-
 macro reset
 """
     env Humidity 100
 """
+
+macro get_light
+"""
+sysbus.i2c1.sensor Humidity
+"""
+
+
+
+
+
+
+
 
 
 runMacro $start

@@ -3,7 +3,7 @@ all:
 	ninja -C build
 	renode --execute "s @renode/macros.resc"
 
-start:
+sim:
 	renode --execute "s @renode/macros.resc"
 
 remake:
