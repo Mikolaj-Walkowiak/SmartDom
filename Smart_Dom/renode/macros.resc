@@ -27,7 +27,10 @@ macro read_lights
 """
     sysbus.gpioPortB ReadDoubleWord 0xc
 """
-
+macro power
+"""
+sysbus.gpioPortC.power_btn PressAndRelease
+"""
 
 
 
