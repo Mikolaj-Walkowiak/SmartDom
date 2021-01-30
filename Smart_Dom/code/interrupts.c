@@ -8,9 +8,6 @@ int is_init = 0;
 //typedef void (*gpio_callback_handler_t)(const struct device *port, struct gpio_callback *cb, gpio_port_pins_t pins)
 void handler(const struct device *dev, struct gpio_callback *data, gpio_port_pins_t pins)
 {
-
-    if (is_init > 1)
-    {
         if (pins & 0x1)
     {
         is_on = !is_on;
@@ -37,12 +34,6 @@ void handler(const struct device *dev, struct gpio_callback *data, gpio_port_pin
         gpio_pin_set_raw(irq_handler, 3, 0);
     }
 
-    }
-    else
-    {
-        //printk("INIT VAL: %d\N",is_init);
-        is_init++;
-    }
 }
 
 bool check_power()
@@ -56,7 +47,7 @@ bool check_alarm()
 
 int interrupts_init()
 {
-    irq_handler = device_get_binding("GPIOC");
+    irq_handler = device_get_binding("GPIOA");
     if (!irq_handler)
     {
         printk("IRQ controller couldn't connect to device\n");

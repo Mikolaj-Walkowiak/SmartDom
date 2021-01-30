@@ -11,7 +11,7 @@
 #define SLEEP_TIME_MS 350
 
 int blinds_in_percent = 0;
-uint8_t light_value = 0, blinds_value = 255;
+uint8_t light_value = 0, blinds_value = 127;
 
 void change_blinds_position(int light_level)
 {
@@ -20,20 +20,20 @@ void change_blinds_position(int light_level)
 	{
 	case 0 ... 25:
 		blinds_value = 0;
-		light_value = 255;
+		light_value = 127;
 		success += blinds_set(blinds_value);
 		success_l += inside_lights_set(light_value);
 		blinds_in_percent = 100;
 		break;
 	case 26 ... 50:
-		blinds_value = 64;
-		light_value = 191;
+		blinds_value = 100;
+		light_value = 27;
 		success += blinds_set(blinds_value);
 		success_l += inside_lights_set(light_value);
 		blinds_in_percent = 25;
 		break;
 	default:
-		blinds_value = 255;
+		blinds_value = 127;
 		light_value = 0;
 		success += blinds_set(blinds_value);
 		success_l += inside_lights_set(light_value);
@@ -69,7 +69,7 @@ void main(void)
 	}
 	printk("WELCOME, ALL SYSTEMS ARE OPERATIONAL\n");
 	int light_level = 100, last_light_level = 100, after_reset = 1;
-
+//26g masła + 
 	while (1)
 	{
 		if (check_power())
@@ -92,8 +92,9 @@ void main(void)
 				light_level = sensor_read();
 				printk("Current light level: %d\n", light_level);
 				uint8_t current_pos = blinds_read();
+				uint8_t current_light = inside_lights_read();
 				printk("Blinds are at %d!\% (position = %d)\n", blinds_in_percent, current_pos);
-				printk("Lights are at %d!\%\n", blinds_in_percent);
+				printk("Lights are at %d!\%(real val = %u)\n", blinds_in_percent, current_light);
 				if (!(last_light_level == light_level))
 				{
 					change_blinds_position(light_level);
