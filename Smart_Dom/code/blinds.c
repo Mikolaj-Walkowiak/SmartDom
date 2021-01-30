@@ -28,7 +28,7 @@ int blinds_set(uint8_t pos){
         //int gpio_pin_set_raw(const struct device *port, gpio_pin_t pin, int value)
         for (int i=0; i<PIN_COUNT; i++) {
             int one =1;
-            result = gpio_pin_set_raw(blinds, i, pos & (one << i));
+            result += gpio_pin_set_raw(blinds, i, pos & (one << i));
         }
         return result;
     }
