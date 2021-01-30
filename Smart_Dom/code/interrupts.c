@@ -47,7 +47,7 @@ bool check_alarm()
 
 int interrupts_init()
 {
-    irq_handler = device_get_binding("GPIOA");
+    irq_handler = device_get_binding("GPIOC");
     if (!irq_handler)
     {
         printk("IRQ controller couldn't connect to device\n");
