@@ -5,3 +5,9 @@ sensor: Sensors.SI70xx @ i2c1 0x40{
 power_btn: Miscellaneous.Button @ gpioPortC 0 {
     IRQ -> gpioPortC@0
 }
+fire_sensor: Miscellaneous.Button @ gpioPortC 1 {
+    IRQ -> gpioPortC@1
+}
+fire_clear: Miscellaneous.Button @ gpioPortC 2 {
+    IRQ -> gpioPortC@2
+}

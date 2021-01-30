@@ -72,22 +72,42 @@ void main(void)
 
 	while (1)
 	{
-		if (after_reset)
+		if (check_power())
 		{
-			blinds_set(blinds_value);
-			inside_lights_set(light_value);
-			after_reset = 0;
+			printk("===================\n");
+			if (check_alarm())
+			{
+				printk("IOIOIOIOioioioIOIOOIOIioioioIOIOIOIOIOIOIO!\n");
+				printk("ALARM ACTIVATED! PRESS THE BUTTON TO DEACTIVATE!\n");
+				after_reset = 1;
+			}
+			else
+			{
+				if (after_reset)
+				{
+					blinds_set(blinds_value);
+					inside_lights_set(light_value);
+					after_reset = 0;
+				}
+				light_level = sensor_read();
+				printk("Current light level: %d\n", light_level);
+				uint8_t current_pos = blinds_read();
+				printk("Blinds are at %d!\% (position = %d)\n", blinds_in_percent, current_pos);
+				printk("Lights are at %d!\%\n", blinds_in_percent);
+				if (!(last_light_level == light_level))
+				{
+					change_blinds_position(light_level);
+					last_light_level = light_level;
+				}
+			}
+			printk("===================\n");
+			k_msleep(SLEEP_TIME_MS);
 		}
-		light_level = sensor_read();
-		printk("Current light level: %d\n", light_level);
-		uint8_t current_pos = blinds_read();
-		printk("Blinds are at %d!\% (position = %d)\n", blinds_in_percent, current_pos);
-		printk("Lights are at %d!\%\n", blinds_in_percent);
-		if (!(last_light_level == light_level))
+		else
 		{
-			change_blinds_position(light_level);
-			last_light_level = light_level;
+			after_reset = 1;
+			//k_msleep(5*SLEEP_TIME_MS);
+			k_msleep(5 * SLEEP_TIME_MS);
 		}
-		k_msleep(SLEEP_TIME_MS);
 	}
 }

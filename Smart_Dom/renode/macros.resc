@@ -19,6 +19,8 @@ macro reset
 """
     env Humidity 100
 """
+
+
 macro read_blinds
 """
     sysbus.gpioPortA ReadDoubleWord 0xc
@@ -27,9 +29,23 @@ macro read_lights
 """
     sysbus.gpioPortB ReadDoubleWord 0xc
 """
+macro read_alarm
+"""
+    sysbus.gpioPortC ReadDoubleWord 0xc
+"""
+
+
 macro power
 """
 sysbus.gpioPortC.power_btn PressAndRelease
+"""
+macro fire
+"""
+sysbus.gpioPortC.fire_sensor PressAndRelease
+"""
+macro fire_clear
+"""
+sysbus.gpioPortC.fire_clear PressAndRelease
 """
 
 
